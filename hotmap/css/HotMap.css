@@ -1,0 +1,16 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+#content{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: block;
+}
+#map{
+    border: none;
+    height: 600px;
+    width: 1000px;
+}
