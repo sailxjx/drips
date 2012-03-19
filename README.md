@@ -1,7 +1,7 @@
 #pinyin
 ***
-<h1>Server:</h1>
-Py.php
+Server:
+`Py.php`
 
 Client:
 `PyClent.php --word={$word} --mode={$mode} --multi={bool}`
