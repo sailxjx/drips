@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <name>Job Unity Management Platform</name>
+    <version>0.1 BETA
+</version>
+    <help>Usage: launcher.php [ClassName] [Options] [Arguments]
+    --help          显示帮助信息
+    -d --daemon     以守护进程方式启动
+    -v --version    显示版本
+</help>
+</root>
