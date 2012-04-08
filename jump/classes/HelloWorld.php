@@ -8,13 +8,13 @@
  */
 class HelloWorld extends JobBase {
 
-	public function run() {
-		Util::output('HelloWorld');
-		for ($i = 0; $i < 7; $i++) {
-			print_r($this->aParams);
-			sleep(3);
-		}
-		exit;
-	}
+    public function run() {
+        Util::logInfo('HelloWorld');
+        for ($i = 0; $i < 7; $i++) {
+            Util::logInfo(var_export($this->aParams, true));
+            sleep(3);
+        }
+        exit;
+    }
 
 }
