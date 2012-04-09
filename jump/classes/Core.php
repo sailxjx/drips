@@ -102,13 +102,11 @@ final class JobCore {
     public function showChangeLog() {
         $oXml = simplexml_load_file(Util::getConfig('ManPage'));
         $aChangeLog = json_decode(json_encode($oXml->changelog), true);
-        $i = 0;
         foreach ($oXml->changelog as $oChangeLog) {
             $aAttrs = json_decode(json_encode($oChangeLog), true);
             echo $aAttrs['@attributes']['date'], PHP_EOL;
-            echo $aChangeLog[$i], PHP_EOL;
+            echo $aAttrs[0], PHP_EOL;
             echo '========================================================', PHP_EOL;
-            $i++;
         }
         exit;
     }
