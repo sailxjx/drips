@@ -8,7 +8,7 @@
  */
 class HelloWorld extends JobBase {
 
-    public function run() {
+    public function main() {
         Util::logInfo('HelloWorld');
         for ($i = 0; $i < 7; $i++) {
             Util::logInfo(var_export($this->aParams, true));
