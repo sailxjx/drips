@@ -269,7 +269,7 @@ abstract class Util {
 		return $arr;
 	}
 
-	public static function getFileContent($sFile, $sSetContent = '') {
+	public static function getFileCon($sFile, $sSetContent = '') {
 		if (file_exists($sFile)) {
 			return file_get_contents($sFile);
 		} else {
@@ -282,7 +282,7 @@ abstract class Util {
 		}
 	}
 
-	public static function setFileContent($sFile, $sContent, $iOption = FILE_BINARY) {
+	public static function setFileCon($sFile, $sContent, $iOption = FILE_BINARY) {
 		if (!file_exists($sFile)) {
 			$sDir = dirname($sFile);
 			if (!is_dir($sDir)) {
@@ -300,7 +300,7 @@ abstract class Util {
 	public static function logInfo($sContent, $sLogFile = null) {
 		$sContent = date('Y-m-d H:i:s') . ':[' . JobCore::getIns()->getJobClass() . '] ' . $sContent . PHP_EOL;
 		$sLogFile = empty($sLogFile) ? JobCore::getIns()->getLogFile() : $sLogFile;
-		self::setFileContent($sLogFile, $sContent, FILE_APPEND);
+		self::setFileCon($sLogFile, $sContent, FILE_APPEND);
 		return true;
 	}
 
