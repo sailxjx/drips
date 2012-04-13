@@ -17,6 +17,12 @@ final class JobCore {
 		'--changelog' => 'showChangeLog',
 		'--daemon' => 'daemon'
 	);
+	protected $aDCmds = array(
+		self::C_START,
+		self::C_STOP,
+		self::C_RESTART
+	);
+	protected $sCmd;
 	protected $aMan;
 	protected $sJobClass;
 	protected $aParams;
@@ -24,6 +30,10 @@ final class JobCore {
 	protected static $oIns;
 	protected $sLogFile;
 	protected $iDNum;
+
+	const C_START = 'start';
+	const C_STOP = 'stop';
+	const C_RESTART = 'restart';
 
 	/**
 	 * instance of JobCore
@@ -55,12 +65,21 @@ final class JobCore {
 	public function init($argv) {
 		unset($argv[0]);
 		list($this->sJobClass, $this->aParams, $this->aOptions) = $this->hashArgv($argv);
+		$this->rCmd();
 		foreach ($this->aOptionMaps as $sOps => $sFunc) {
 			if (in_array($sOps, $this->aOptions)) {
 				call_user_func(array(self::$oIns, $sFunc));
 			}
 		}
 		return self::$oIns;
+	}
+
+	/**
+	 * 执行不同命令
+	 * 
+	 */
+	protected function rCmd() {
+		//TODO run commands
 	}
 
 	protected function hashArgv($argv) {
@@ -76,6 +95,10 @@ final class JobCore {
 			} elseif (preg_match('/^--?.*/i', $str)) {//选项
 				$aOptions[] = $str;
 			} else {
+				if (in_array($str, $this->aDCmds)) {//默认命令
+					$this->sCmd = $str;
+					continue;
+				}
 				$sClassName = $str;
 			}
 		}
