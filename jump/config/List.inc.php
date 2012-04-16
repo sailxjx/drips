@@ -1,5 +1,5 @@
 <?php
 
 $config['cmd'] = array(
-	'Listener &'
+	'Listener'
 );

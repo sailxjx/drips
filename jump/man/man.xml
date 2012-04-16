@@ -19,5 +19,5 @@
     </help>
     <changelog date='2012-04-06'>增加Core,Base,Util</changelog>
     <changelog date='2012-04-08'>增加Daemon,选择日志文件开关,fork数量开关</changelog>
-    <changelog date='2012-04-16'>增加shutdown方法,增加Start类，修改启动方式</changelog>
+    <changelog date='2012-04-16'>增加shutdown方法,增加Start类,增加批量启动,修改启动方式</changelog>
 </root>

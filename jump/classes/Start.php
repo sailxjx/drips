@@ -9,20 +9,20 @@
 class Start extends JobBase {
 
     protected function main() {
-        $sJobClass = $this->oCore->getJobClass();
-        if (empty($sJobClass)) {
+        $sJClass = $this->oCore->getJobClass();
+        if (empty($sJClass)) {
             $this->startAll();
         } else {
-            $this->startOne($sJobClass);
+            $this->startOne($sJClass);
         }
     }
 
-    protected function startOne($sJobClass) {
-        if (!reqClass($sJobClass)) {
+    protected function startOne($sJClass) {
+        if (!reqClass($sJClass)) {
             Util::output('Class not exsit!');
             $this->oCore->showHelp();
         }
-        $sJobClass::getIns()->run();
+        $sJClass::getIns()->run();
     }
 
     protected function startAll() {
@@ -35,16 +35,22 @@ class Start extends JobBase {
         return true;
     }
 
+    /**
+     * @todo 使用Daemon
+     * @param type $sCmd
+     * @param type $sMode
+     * @return boolean 
+     */
     protected function startJob($sCmd, $sMode = 'r') {
         if (empty($sCmd)) {
             return false;
         }
         if ($rProc = popen($sCmd, $sMode)) {
             pclose($rProc);
-            Util::logInfo('Start -> ', $sCmd);
+            Util::logInfo('Start -> ' . $sCmd);
             return true;
         } else {
-            Util::logInfo('StartError -> ', $sCmd);
+            Util::logInfo('StartError -> ' . $sCmd);
             return false;
         }
     }

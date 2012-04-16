@@ -7,5 +7,22 @@
  * GTalk: sailxjx@gmail.com
  */
 class Stop extends JobBase {
-	
+
+    protected function main() {
+        $sJClass = $this->oCore->getJobClass();
+        if (empty($sJClass)) {
+            $this->stopAll();
+        } else {
+            $this->stopOne($sJClass);
+        }
+    }
+
+    protected function stopAll() {
+        
+    }
+
+    protected function stopOne() {
+        
+    }
+
 }
