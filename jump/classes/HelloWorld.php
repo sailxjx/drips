@@ -8,11 +8,11 @@
  */
 class HelloWorld extends JobBase {
 
-    public function main() {
+    protected function main() {
         Util::logInfo('HelloWorld');
         for ($i = 0; $i < 7; $i++) {
             Util::logInfo(var_export($this->aParams, true));
-            sleep(3);
+            sleep(1);
         }
         exit;
     }

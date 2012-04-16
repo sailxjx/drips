@@ -8,9 +8,11 @@
  */
 class Listener extends JobBase {
 
-	public function main() {
+	protected function main() {
 		while (true) {
-			$this->listen();
+            Util::logInfo('fadfasdf');
+            sleep(1);
+//			$this->listen();
 		};
 		return true;
 	}
