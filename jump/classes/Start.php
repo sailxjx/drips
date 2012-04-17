@@ -15,20 +15,22 @@ class Start extends JobBase {
         } else {
             $this->startOne($sJClass);
         }
+        return true;
     }
 
     protected function startOne($sJClass) {
         if (!reqClass($sJClass)) {
             Util::output('Class not exsit!');
             $this->oCore->showHelp();
+            return false;
         }
         $sJClass::getIns()->run();
     }
 
     protected function startAll() {
-        $aJobList = Util::getConfig('cmd', 'List');
+        $aJList = Util::getConfig('cmd', 'List');
         $sCmd = '';
-        foreach ($aJobList as $sOriCmd) {
+        foreach ($aJList as $sOriCmd) {
             $sCmd = APP_PATH . 'launcher.php start ' . $sOriCmd;
             $this->startJob($sCmd);
         }
@@ -41,7 +43,7 @@ class Start extends JobBase {
      * @param type $sMode
      * @return boolean 
      */
-    protected function startJob($sCmd, $sMode = 'r') {
+    protected function startJob($sCmd, $sMode = 'w') {
         if (empty($sCmd)) {
             return false;
         }

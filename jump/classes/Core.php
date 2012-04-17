@@ -20,7 +20,8 @@ final class JobCore {
     protected $aDCmds = array(
         Const_Common::C_START,
         Const_Common::C_STOP,
-        Const_Common::C_RESTART
+        Const_Common::C_RESTART,
+        Const_Common::C_KILL
     );
     protected $sCmd;
     protected $aMan;
@@ -72,7 +73,7 @@ final class JobCore {
 
     /**
      * 执行不同命令
-     * 
+     * @todo 执行多条命令？
      */
     protected function rCmd() {
         if (empty($this->sCmd) || !reqClass($sCmdClass = ucfirst($this->sCmd))) {
@@ -129,8 +130,8 @@ final class JobCore {
         $aChangeLog = json_decode(json_encode($oXml->changelog), true);
         foreach ($oXml->changelog as $oChangeLog) {
             $aAttrs = json_decode(json_encode($oChangeLog), true);
-            echo $aAttrs['@attributes']['date'], PHP_EOL;
-            echo $aAttrs[0], PHP_EOL;
+            echo @$aAttrs['@attributes']['date'], PHP_EOL;
+            echo @$aAttrs[0], PHP_EOL;
             echo '========================================================', PHP_EOL;
         }
         exit;
@@ -141,8 +142,7 @@ final class JobCore {
             Util::output('Class is not exsit!');
             $this->showHelp();
         }
-        $sPidFile = Util::getConfig('PidPath') . $this->sJobClass . '.pid';
-        Daemonize::daemon($sPidFile);
+        Daemonize::daemon(Util::getPidFileByClass($this->sJobClass));
     }
 
     public function showHelp() {
@@ -307,11 +307,13 @@ abstract class Util {
         if (file_exists($sFile)) {
             return file_get_contents($sFile);
         } else {
-            $sDir = dirname($sFile);
-            if (!is_dir($sDir)) {
-                mkdir($sDir, 0777, true);
+            if (!empty($sSetContent)) {
+                $sDir = dirname($sFile);
+                if (!is_dir($sDir)) {
+                    mkdir($sDir, 0777, true);
+                }
+                file_put_contents($sFile, $sSetContent);
             }
-            file_put_contents($sFile, $sSetContent);
             return '';
         }
     }
@@ -338,6 +340,37 @@ abstract class Util {
         return true;
     }
 
+    public static function getPidFileByClass($sCName) {
+        if (empty($sCName)) {
+            return null;
+        }
+        return self::getConfig('PidPath') . $sCName . '.pid';
+    }
+
+    public static function report() {
+        //@todo error report
+    }
+
+    public static function stopProcById($iPid) {
+        if (posix_kill($iPid, SIGTERM)) {
+            self::logInfo('Stop Process Succ:' . $iPid);
+            return true;
+        } else {
+            self::logInfo('Stop Process Error:' . $iPid);
+            return false;
+        }
+    }
+
+    public static function getProcIdsByClass($sJClass) {
+        $sPidFile = Util::getPidFileByClass($sJClass);
+        $aPids = array();
+        if (is_file($sPidFile)) {
+            $sPids = Util::getFileCon($sPidFile);
+            $aPids = explode(',', $sPids);
+        }
+        return $aPids;
+    }
+
 }
 
 /**
@@ -355,7 +388,8 @@ abstract class Daemonize {
             exit();
         }
         $iDNum = $oCore->getDaemonNum();
-        $aPid = array();
+        $sPids = Util::getFileCon($sPidFile);
+        $aPid = !empty($sPids) ? explode(',', $sPids) : array();
         for ($i = 0; $i < $iDNum; $i++) {
             $iPid = pcntl_fork();
             if ($iPid === -1) {
@@ -365,9 +399,7 @@ abstract class Daemonize {
                 if ($i < ($iDNum - 1)) {
                     continue;
                 } else {
-                    $fp = fopen($sPidFile, 'w');
-                    fwrite($fp, implode(',', $aPid));
-                    fclose($fp);
+                    Util::setFileCon($sPidFile, implode(',', $aPid));
                 }
                 exit;
             } else {//child
@@ -382,14 +414,18 @@ abstract class Daemonize {
                     Util::logInfo("could not detach from terminal");
                     exit;
                 }
+//                pcntl_signal(SIGTERM, "Daemonize::sigHandler");
                 break; //break the parent loop
             }
         }
         return true;
     }
 
-    public static function sigHandler($signo) {
-        switch ($signo) {
+    public static function sigHandler($iSigno) {
+        switch ($iSigno) {
+            case SIGTERM:
+                exit;
+                break;
             default:
                 break;
         }

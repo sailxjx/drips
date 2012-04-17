@@ -8,25 +8,25 @@
  */
 class Listener extends JobBase {
 
-	protected function main() {
-		while (true) {
-            Util::logInfo('fadfasdf');
-            sleep(1);
-//			$this->listen();
-		};
-		return true;
-	}
+    protected function main() {
+        $i = 0;
+        while (true) {
+            Util::logInfo('listen times:' . $i++);
+            sleep(5);
+        };
+        return true;
+    }
 
-	protected $sPidDir = '';
-	protected $aPids;
+    protected $sPidDir = '';
+    protected $aPids;
 
-	protected function listen() {
-		$aPids = $this->readPids();
-		//TODO 监控作业
-	}
+    protected function listen() {
+        $aPids = $this->readPids();
+        //TODO 监控作业
+    }
 
-	protected function readPids() {
-		
-	}
+    protected function readPids() {
+        
+    }
 
 }

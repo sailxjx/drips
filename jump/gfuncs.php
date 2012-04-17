@@ -10,6 +10,9 @@ function jumpAutoLoad($sName) {
 }
 
 function reqClass($sClass) {
+    if (class_exists($sClass)) {
+        return true;
+    }
     $aPath = explode('_', $sClass);
     $iCnt = count($aPath) - 1;
     $sDir = 'classes/';

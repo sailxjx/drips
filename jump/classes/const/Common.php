@@ -11,5 +11,6 @@ abstract class Const_Common {
     const C_START = 'start';
     const C_STOP = 'stop';
     const C_RESTART = 'restart';
+    const C_KILL = 'kill';
 
 }

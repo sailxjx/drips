@@ -1,5 +1,6 @@
 <?php
 
 $config['cmd'] = array(
-	'Listener'
+    'Listener -d --daemon-num=3',
+    'HelloWorld -d --daemon-num=2'
 );
