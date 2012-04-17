@@ -27,7 +27,7 @@ final class JobCore {
     protected $sJobClass;
     protected $aParams;
     protected $aOptions;
-    protected static $oIns;
+    private static $oIns;
     protected $sLogFile;
     protected $iDNum;
 
@@ -203,7 +203,7 @@ abstract class JobBase {
      * instance
      * @var array
      */
-    protected static $aIns;
+    private static $aIns;
 
     /**
      *
@@ -226,9 +226,9 @@ abstract class JobBase {
     public static function getIns() {
         $sClass = get_called_class();
         if (!isset(self::$aIns[$sClass])) {
-            static::$aIns[$sClass] = new $sClass();
+            self::$aIns[$sClass] = new $sClass();
         }
-        return static::$aIns[$sClass];
+        return self::$aIns[$sClass];
     }
 
     public function run() {
