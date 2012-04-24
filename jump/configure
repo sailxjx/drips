@@ -1,0 +1,3 @@
+#!/bin/bash
+ac_help="--verbose --version"
+ac_prev="--version"
