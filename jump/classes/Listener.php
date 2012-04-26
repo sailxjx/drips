@@ -9,6 +9,7 @@
 class Listener extends JobBase {
 
     protected function main() {
+        $this->readJList();
         $i = 0;
         while (true) {
             Util::logInfo('listen times:' . $i++);
@@ -19,6 +20,7 @@ class Listener extends JobBase {
 
     protected $sPidDir = '';
     protected $aPids;
+    protected $aJobList = array();
 
     protected function listen() {
         $aPids = $this->readPids();
@@ -27,6 +29,19 @@ class Listener extends JobBase {
 
     protected function readPids() {
         
+    }
+
+    protected function readJList() {
+        $aCmds = Util::getConfig('cmd', 'List');
+        $aJClass = array();
+        foreach ($aCmds as $sCmd) {
+            $aClass = array();
+            preg_match('/^([a-zA-Z]+)|--daemon-num=(\d+)?/i', $sCmd, $aClass);
+            print_r($aClass);exit;
+            if (!empty($aClass)) {
+                $aJClass[] = $aClass;
+            }
+        }
     }
 
 }
