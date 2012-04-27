@@ -6,7 +6,7 @@
  * @author: jxxu
  * GTalk: sailxjx@gmail.com
  */
-class Start extends JobBase {
+class Start extends Base {
 
     protected function main() {
         $sJClass = $this->oCore->getJobClass();
@@ -41,7 +41,7 @@ class Start extends JobBase {
      * @todo 使用Daemon
      * @param type $sCmd
      * @param type $sMode
-     * @return boolean 
+     * @return boolean
      */
     protected function startJob($sCmd, $sMode = 'w') {
         if (empty($sCmd)) {

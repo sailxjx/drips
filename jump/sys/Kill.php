@@ -6,7 +6,7 @@
  * @author: jxxu
  * GTalk: sailxjx@gmail.com
  */
-class Kill extends JobBase {
+class Kill extends Base {
 
     protected function main() {
         $this->doKill();

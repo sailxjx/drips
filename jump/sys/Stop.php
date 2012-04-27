@@ -6,7 +6,7 @@
  * @author: jxxu
  * GTalk: sailxjx@gmail.com
  */
-class Stop extends JobBase {
+class Stop extends Base {
 
     protected function main() {
         $sJClass = $this->oCore->getJobClass();

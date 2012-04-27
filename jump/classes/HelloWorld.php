@@ -6,7 +6,7 @@
  * @author: jxxu
  * GTalk: sailxjx@gmail.com
  */
-class HelloWorld extends JobBase {
+class HelloWorld extends Base {
 
     protected function main() {
         Util::logInfo('HelloWorld');

@@ -6,7 +6,7 @@
  * @author: jxxu
  * GTalk: sailxjx@gmail.com
  */
-class Listener extends JobBase {
+class Listener extends Base {
 
     protected function main() {
         $this->readJList();
@@ -28,7 +28,7 @@ class Listener extends JobBase {
     }
 
     protected function readPids() {
-        
+
     }
 
     protected function readJList() {

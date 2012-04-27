@@ -6,10 +6,10 @@
  * @author: jxxu
  * GTalk: sailxjx@gmail.com
  */
-class Restart extends JobBase {
+class Restart extends Base {
 
 	protected function main() {
-		
+
 	}
 
 }
