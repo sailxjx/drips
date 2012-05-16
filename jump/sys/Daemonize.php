@@ -44,21 +44,28 @@ abstract class Daemonize {
 					Util::logInfo("could not detach from terminal");
 					exit;
 				}
-//                pcntl_signal(SIGTERM, "Daemonize::sigHandler");
+				self::ctrlSignal();
 				break; //break the parent loop
 			}
 		}
 		return true;
 	}
 
-	public static function sigHandler($iSigno) {
-		switch ($iSigno) {
+	public static function sigHandler($iSignal) {
+		switch ($iSignal) {
 			case SIGTERM:
+				Util::logInfo('term now');
 				exit;
 				break;
 			default:
+				exit;
 				break;
 		}
+	}
+
+	protected static function ctrlSignal() {
+		declare (ticks = 1); //for signal control
+		pcntl_signal(SIGTERM, "Daemonize::sigHandler");
 	}
 
 	/**
