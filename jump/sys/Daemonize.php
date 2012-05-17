@@ -6,13 +6,27 @@
  * @author: jxxu
  * GTalk: sailxjx@gmail.com
  */
-abstract class Daemonize {
+class Daemonize {
 
-	public static function daemon($sPidFile) {
+	private static $oIns;
+
+	/**
+	 * instance of Daemonize
+	 * @return Daemonize
+	 */
+	public static function &getIns() {
+		if (!isset(self::$oIns)) {
+			self::$oIns = new Daemonize();
+		}
+		return self::$oIns;
+	}
+
+	public function daemon() {
 		$oCore = Core::getIns();
+		$sPidFile = Util_Sys::getPidFileByClass($oCore->getJobClass());
 		if (empty($sPidFile)) {
 			Util::logInfo('could not find pid file!');
-			exit();
+			exit;
 		}
 		$iDNum = $oCore->getDaemonNum();
 		$sPids = Util::getFileCon($sPidFile);
@@ -54,11 +68,10 @@ abstract class Daemonize {
 	public static function sigHandler($iSignal) {
 		switch ($iSignal) {
 			case SIGTERM:
-				Util::logInfo('term now');
+				Util::logInfo('term by system signal!');
 				exit;
 				break;
 			default:
-				exit;
 				break;
 		}
 	}

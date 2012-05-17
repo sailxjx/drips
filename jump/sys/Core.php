@@ -9,13 +9,13 @@
 final class Core {
 
 	protected $aOptionMaps = array(
-		'--help' => 'showHelp',
-		'-v' => 'showVersion',
-		'--version' => 'showVersion',
-		'-d' => 'daemon',
-		'-l' => 'showChangeLog',
-		'--changelog' => 'showChangeLog',
-		'--daemon' => 'daemon'
+		Const_Common::OL_HELP => 'showHelp',
+		Const_Common::OS_VERSION => 'showVersion',
+		Const_Common::OL_VERSION => 'showVersion',
+		Const_Common::OS_LOG => 'showChangeLog',
+		Const_Common::OL_LOG => 'showChangeLog',
+		Const_Common::OS_DAEMON => 'daemon',
+		Const_Common::OL_DAEMON => 'daemon'
 	);
 	protected $aDCmds = array(
 		Const_Common::C_START,
@@ -36,7 +36,7 @@ final class Core {
 	 * instance of JobCore
 	 * @return Core
 	 */
-	public static function getIns() {
+	public static function &getIns() {
 		if (!self::$oIns) {
 			self::$oIns = new Core();
 		}
@@ -61,9 +61,9 @@ final class Core {
 	 */
 	public function init($argv) {
 		unset($argv[0]);
-		list($this->sJobClass, $this->aParams, $this->aOptions) = $this->hashArgv($argv);
+		list($this->sJobClass, $this->aParams, $this->aOptions, $this->sCmd) = Util_Sys::hashArgv($argv, $this->aDCmds);
 		foreach ($this->aOptionMaps as $sOps => $sFunc) {
-			if (in_array($sOps, $this->aOptions)) {
+			if (in_array($sOps, $this->aOptions) && !empty($sFunc)) {
 				call_user_func(array(self::$oIns, $sFunc));
 			}
 		}
@@ -82,35 +82,6 @@ final class Core {
 			return false;
 		}
 		$sCmdClass::getIns()->run();
-	}
-
-	protected function hashArgv($argv) {
-		$sClassName = null;
-		$aParams = array();
-		$aOptions = array();
-		foreach ($argv as $str) {
-			if (preg_match('/^--.*?=/i', $str)) {//参数
-				$str = str_replace('--', '', $str);
-				$str = str_replace('-', '_', $str);
-				parse_str($str, $aTmp);
-				$aParams = array_merge($aParams, $aTmp);
-			}
-			elseif (preg_match('/^--?.*/i', $str)) {//选项
-				$aOptions[] = $str;
-			}
-			else {
-				if (in_array($str, $this->aDCmds)) {//默认命令
-					$this->sCmd = $str;
-					continue;
-				}
-				$sClassName = $str;
-			}
-		}
-		return array(
-			$sClassName,
-			$aParams,
-			$aOptions
-		);
 	}
 
 	public function getMan() {
@@ -144,7 +115,7 @@ final class Core {
 			Util::output('Class is not exsit!');
 			$this->showHelp();
 		}
-		Daemonize::daemon(Util::getPidFileByClass($this->sJobClass));
+		Daemonize::getIns()->daemon();
 	}
 
 	public function showHelp() {

@@ -13,7 +13,8 @@ Usage: launcher.php [Command] [ClassName] [Options] [Arguments]
         --proc-id={pid}     进程ID(Kill时需要)
         -l --changelog      显示修订记录
         -v --version        显示版本
-		
+        -w --listen         需要监控
+
 Command:
         start               开启作业
         stop                结束作业
@@ -24,4 +25,5 @@ Command:
     <changelog date='2012-04-08'>增加Daemon,选择日志文件开关,fork数量开关</changelog>
     <changelog date='2012-04-16'>增加shutdown方法,增加Start类,增加批量启动,修改启动方式</changelog>
     <changelog date='2012-04-17'>增加Stop类,批量停止。增加Kill类,根据进程ID停止任务</changelog>
+    <changelog date='2012-05-17'>增加Listener类,系统调用Util移入Util_Sys,Deamonize类改为单例调用</changelog>
 </root>

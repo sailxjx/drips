@@ -44,7 +44,7 @@ abstract class Base {
 	 * get a new instance
 	 * @return Base
 	 */
-	public static function getIns() {
+	public static function &getIns() {
 		$sClass = get_called_class();
 		if (!isset(self::$aIns[$sClass])) {
 			self::$aIns[$sClass] = new $sClass();

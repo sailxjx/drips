@@ -86,36 +86,8 @@ abstract class Util {
 		return true;
 	}
 
-	public static function getPidFileByClass($sCName) {
-		if (empty($sCName)) {
-			return null;
-		}
-		return self::getConfig('PidPath') . $sCName . '.pid';
-	}
-
 	public static function report() {
 		//@todo error report
-	}
-
-	public static function stopProcById($iPid) {
-		if (posix_kill($iPid, SIGTERM)) {
-			self::logInfo('Stop Process Succ:' . $iPid);
-			return true;
-		}
-		else {
-			self::logInfo('Stop Process Error:' . $iPid);
-			return false;
-		}
-	}
-
-	public static function getProcIdsByClass($sJClass) {
-		$sPidFile = Util::getPidFileByClass($sJClass);
-		$aPids = array();
-		if (is_file($sPidFile)) {
-			$sPids = Util::getFileCon($sPidFile);
-			$aPids = explode(',', $sPids);
-		}
-		return $aPids;
 	}
 
 }
