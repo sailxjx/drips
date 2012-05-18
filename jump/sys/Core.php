@@ -24,13 +24,13 @@ final class Core {
 		Const_Common::C_KILL
 	);
 	protected $sCmd;
-	protected $aMan;
+	protected $aMan;//手册内容
 	protected $sJobClass;
 	protected $aParams;
 	protected $aOptions;
 	private static $oIns;
 	protected $sLogFile;
-	protected $iDNum;
+	protected $iDNum;//Deamon进程个数
 
 	/**
 	 * instance of JobCore
@@ -63,7 +63,7 @@ final class Core {
 		unset($argv[0]);
 		list($this->sJobClass, $this->aParams, $this->aOptions, $this->sCmd) = Util_Sys::hashArgv($argv, $this->aDCmds);
 		foreach ($this->aOptionMaps as $sOps => $sFunc) {
-			if (in_array($sOps, $this->aOptions) && !empty($sFunc)) {
+			if (in_array($sOps, $this->aOptions) && method_exists(self::$oIns, $sFunc)) {
 				call_user_func(array(self::$oIns, $sFunc));
 			}
 		}
@@ -100,7 +100,6 @@ final class Core {
 
 	public function showChangeLog() {
 		$oXml = simplexml_load_file(Util::getConfig('ManPage'));
-		$aChangeLog = json_decode(json_encode($oXml->changelog), true);
 		foreach ($oXml->changelog as $oChangeLog) {
 			$aAttrs = json_decode(json_encode($oChangeLog), true);
 			echo @$aAttrs['@attributes']['date'], PHP_EOL;

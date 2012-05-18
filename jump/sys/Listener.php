@@ -8,6 +8,9 @@
  */
 class Listener extends Base {
 
+	protected static $aInitData; //初始数据
+	protected static $sInitFile = 'var/listen.dat'; //初始数据文件
+
 	protected function main() {
 		$this->readJList();
 		$i = 0;
@@ -16,6 +19,33 @@ class Listener extends Base {
 			sleep(5);
 		};
 		return true;
+	}
+
+	protected function __construct() {
+		$this->getInitData();
+		parent::__construct();
+	}
+
+	protected function getInitData() {
+		if (!isset(self::$aInitData)) {
+			$aInitData = Util::getFileCon(APP_PATH . self::$sInitFile);
+			if (!empty($aInitData)) {
+				self::$aInitData = json_decode(base64_decode($aInitData), true);
+			}
+			else {
+				self::$aInitData = array();
+			}
+		}
+		return self::$aInitData;
+	}
+
+	protected function setInitData() {
+		return Util::setFileCon(APP_PATH . self::$sInitFile, json_encode(self::$aInitData));
+	}
+
+	public function __destruct() {
+		$this->setInitData();
+		parent::__destruct();
 	}
 
 	protected $sPidDir = '';
@@ -39,10 +69,11 @@ class Listener extends Base {
 			list($sClassName, $aParams, $aOptions, $sCmd) = Util_Sys::hashArgv($aArgvs);
 			$aJClass[$sClassName] = array(
 				'params' => $aParams,
-				'options' => $aOptions
+				'options' => $aOptions,
+				'hehe'=>'呵呵:-)'
 			);
 		}
-		print_r($aJClass);
+		self::$aInitData = $aJClass;
 		exit;
 	}
 

@@ -86,7 +86,7 @@ abstract class Util {
 		return true;
 	}
 
-	public static function report() {
+	public static function report($iCode,$s) {
 		//@todo error report
 	}
 
