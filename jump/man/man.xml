@@ -46,5 +46,7 @@
         1.增加hook,
         2.启动命令方法移入Util_Sys中
         3.Listener增加Daemon进程
+        4.增加进程监控,相关参数,-w\--listen\--min-daemon-num
+        5.bug Listener父进程怎么退出
     </changelog>
 </root>
