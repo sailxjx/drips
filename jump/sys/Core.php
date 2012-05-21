@@ -24,18 +24,19 @@ final class Core {
 		Const_Common::C_KILL
 	);
 	protected $sCmd;
-	protected $aMan;//手册内容
+	protected $aMan; //手册内容
 	protected $sJobClass;
 	protected $aParams;
 	protected $aOptions;
 	private static $oIns;
 	protected $sLogFile;
-	protected $iDNum;//Deamon进程个数
+	protected $iDNum; //Deamon进程个数
 
 	/**
 	 * instance of JobCore
 	 * @return Core
 	 */
+
 	public static function &getIns() {
 		if (!self::$oIns) {
 			self::$oIns = new Core();
@@ -62,12 +63,22 @@ final class Core {
 	public function init($argv) {
 		unset($argv[0]);
 		list($this->sJobClass, $this->aParams, $this->aOptions, $this->sCmd) = Util_Sys::hashArgv($argv, $this->aDCmds);
+		return self::$oIns;
+	}
+
+	/**
+	 * run job
+	 * @return Core
+	 */
+	public function run() {
+		Hook::getIns()->pre();
 		foreach ($this->aOptionMaps as $sOps => $sFunc) {
 			if (in_array($sOps, $this->aOptions) && method_exists(self::$oIns, $sFunc)) {
 				call_user_func(array(self::$oIns, $sFunc));
 			}
 		}
 		$this->rCmd();
+		Hook::getIns()->post();
 		return self::$oIns;
 	}
 
@@ -127,8 +138,8 @@ final class Core {
 	public function getDaemonNum() {
 		if (!isset($this->iDNum)) {
 			$iDNum = 1;
-			if (isset($this->aParams['daemon_num'])) {
-				$iDNum = intval($this->aParams['daemon_num']);
+			if (isset($this->aParams[Const_Common::P_DAEMON_NUM])) {
+				$iDNum = intval($this->aParams[Const_Common::P_DAEMON_NUM]);
 				if ($iDNum <= 0 || $iDNum > Util::getConfig('MaxDaemonNum')) {
 					$iDNum = 1;
 				}
@@ -140,11 +151,11 @@ final class Core {
 
 	public function getLogFile() {
 		if (!isset($this->sLogFile)) {
-			if (!isset($this->aParams['log_file'])) {
+			if (!isset($this->aParams[Const_Common::P_LOG_FILE])) {
 				$this->sLogFile = Util::getConfig('LogFile');
 			}
 			else {
-				$this->sLogFile = $this->aParams['log_file'];
+				$this->sLogFile = $this->aParams[Const_Common::P_LOG_FILE];
 			}
 		}
 		return $this->sLogFile;

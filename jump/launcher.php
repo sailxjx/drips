@@ -9,4 +9,4 @@ $G_LOAD_PATH = array(
 );
 
 require APP_PATH . 'sys/gfuncs.php'; //全局方法
-Core::getIns()->init($argv);
+Core::getIns()->init($argv)->run();

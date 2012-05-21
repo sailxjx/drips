@@ -7,7 +7,7 @@
  * GTalk: sailxjx@gmail.com
  */
 abstract class Const_Common {
-	//commands
+	// commands
 
 	const C_START = 'start';
 	const C_STOP = 'stop';
@@ -19,10 +19,16 @@ abstract class Const_Common {
 	const OS_VERSION = '-v';
 	const OL_VERSION = '--version';
 	const OS_LOG = '-l';
-	const OL_LOG = '--changelog';
+	const OL_LOG = '--log';
 	const OS_DAEMON = '-d';
 	const OL_DAEMON = '--daemon';
 	const OS_LISTEN = '-w'; //需要监控
 	const OL_LISTEN = '--listen'; //需要监控
+	//params
+	const P_DAEMON_NUM = 'daemon_num';
+	const P_LOG_FILE = 'log_file';
+	const P_PRE_HOOK = 'pre_hook';
+	const P_POST_HOOK = 'post_hook';
+	const P_MIN_DAEMON_NUM = 'min_daemon_num';
 
 }

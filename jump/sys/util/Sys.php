@@ -67,4 +67,71 @@ abstract class Util_Sys {
 		);
 	}
 
+	/**
+	 * param key to argv key
+	 * @param string $sPKey
+	 * @return string
+	 */
+	public static function convParamKeyToArgsKey($sPKey) {
+		return '--' . str_replace('_', '-', $sPKey);
+	}
+
+	public static function runFile($sFile, $sMode = 'w') {
+		if (empty($sFile) || !is_file($sFile)) {
+			return false;
+		}
+		if (!is_executable($sFile)) {
+			Util::logInfo('StartError[file is not executable!] -> ' . $sFile);
+			return false;
+		}
+		if ($rProc = popen($sFile, $sMode)) {
+			pclose($rProc);
+			Util::logInfo('Start -> ' . $sFile);
+			return true;
+		}
+		else {
+			Util::logInfo('StartError -> ' . $sFile);
+			return false;
+		}
+	}
+
+	/**
+	 * @todo 使用Daemon
+	 * @param type $sCmd
+	 * @param type $sMode
+	 * @return boolean
+	 */
+	public static function runCmd($sCmd, $sMode = 'w') {
+		if (empty($sCmd)) {
+			return false;
+		}
+		if ($rProc = popen($sCmd, $sMode)) {
+			pclose($rProc);
+			Util::logInfo('Start -> ' . $sCmd);
+			return true;
+		}
+		else {
+			Util::logInfo('StartError -> ' . $sCmd);
+			return false;
+		}
+	}
+
+	/**
+	 * @todo some better ideas?
+	 * @param int $iPid
+	 * @return string
+	 */
+	public static function getSysProcStatusByPid($iPid) {
+		return shell_exec("ps -p {$iPid}|grep {$iPid}");
+	}
+
+	/**
+	 * @todo some better ideas?
+	 * @param string $sClass
+	 * @return int
+	 */
+	public static function getSysProcNumByClass($sClass) {
+		return shell_exec("ps -ef|grep {$sClass}|grep -v grep|wc -l");
+	}
+
 }

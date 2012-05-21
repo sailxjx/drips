@@ -5,25 +5,46 @@
         0.1 ALPHA
     </version>
     <help>
-Usage: launcher.php [Command] [ClassName] [Options] [Arguments]
-        --help              显示帮助信息
-        -d --daemon         以守护进程方式启动
-        --log-file={file}   设置日志文件
-        --daemon-num={num}  fork进程数量
-        --proc-id={pid}     进程ID(Kill时需要)
-        -l --changelog      显示修订记录
-        -v --version        显示版本
-        -w --listen         需要监控
+        Usage: launcher.php [Command] [ClassName] [Options] [Arguments]
+        --help                  显示帮助信息
+        -d --daemon             以守护进程方式启动
+        --log-file={file}       设置日志文件
+        --daemon-num={num}      daemon进程数量
+        --min-daemon-num={num}  最小daemon进程数量,有监控时低于这个数量将重启,默认为1
+        --proc-id={pid}         进程ID(Kill时需要)
+        -l --log                显示修订记录
+        -v --version            显示版本
+        -w --listen             需要监控
+        --pre-hook={file}       前置钩子
+        --post-hook={file}      后置钩子
 
-Command:
-        start               开启作业
-        stop                结束作业
-        restart             重启作业
-        kill                根据进程ID结束作业
+        Commands:
+        start                   开启作业
+        stop                    结束作业
+        restart                 重启作业
+        kill                    根据进程ID结束作业
     </help>
-    <changelog date='2012-04-06'>增加Core,Base,Util</changelog>
-    <changelog date='2012-04-08'>增加Daemon,选择日志文件开关,fork数量开关</changelog>
-    <changelog date='2012-04-16'>增加shutdown方法,增加Start类,增加批量启动,修改启动方式</changelog>
-    <changelog date='2012-04-17'>增加Stop类,批量停止。增加Kill类,根据进程ID停止任务</changelog>
-    <changelog date='2012-05-17'>增加Listener类,系统调用Util移入Util_Sys,Deamonize类改为单例调用</changelog>
+    <changelog date='2012-04-06'>
+        增加Core,Base,Util
+    </changelog>
+    <changelog date='2012-04-08'>
+        增加Daemon,选择日志文件开关,fork数量开关
+    </changelog>
+    <changelog date='2012-04-16'>
+        增加shutdown方法,增加Start类,增加批量启动,修改启动方式
+    </changelog>
+    <changelog date='2012-04-17'>
+        1.增加Stop类,批量停止。
+        2.增加Kill类,根据进程ID停止任务
+    </changelog>
+    <changelog date='2012-05-17'>
+        1.增加Listener类
+        2.系统调用Util移入Util_Sys
+        3.Deamonize类改为单例调用
+    </changelog>
+    <changelog date='2012-05-21'>
+        1.增加hook,
+        2.启动命令方法移入Util_Sys中
+        3.Listener增加Daemon进程
+    </changelog>
 </root>
