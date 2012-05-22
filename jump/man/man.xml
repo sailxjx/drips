@@ -2,7 +2,7 @@
 <root>
     <name>Job Unity Management Platform</name>
     <version>
-        0.1 ALPHA
+        0.2 ALPHA
     </version>
     <help>
         Usage: launcher.php [Command] [ClassName] [Options] [Arguments]

@@ -179,6 +179,10 @@ class Listener extends Base {
 		}
 		$aPids = explode(',', $sPids);
 		$aPids = array_diff($aPids, array($iPid));
+		if (empty($aPids) && is_file($sPidFile)) {
+			unlink($sPidFile);
+			return true;
+		}
 		Util::setFileCon($sPidFile, implode(',', $aPids));
 		return true;
 	}

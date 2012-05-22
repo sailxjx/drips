@@ -59,16 +59,12 @@ class Stop extends Base {
 				Util::report();
 			}
 		}
-		if (empty($aPids)) {
-			if (file_exists($sPidFile)) {
-				unlink($sPidFile);
-			}
+		if (empty($aPids) && is_file($sPidFile)) {
+			unlink($sPidFile);
 			return true;
 		}
-		else {
-			Util::setFileCon($sPidFile, implode(',', $aPids));
-			return false;
-		}
+		Util::setFileCon($sPidFile, implode(',', $aPids));
+		return false;
 	}
 
 }
