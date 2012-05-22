@@ -81,16 +81,16 @@ abstract class Util_Sys {
 			return false;
 		}
 		if (!is_executable($sFile)) {
-			Util::logInfo('StartError[file is not executable!] -> ' . $sFile);
+			Util::logInfo('StartError[file is not executable!]-> ' . $sFile);
 			return false;
 		}
 		if ($rProc = popen($sFile, $sMode)) {
 			pclose($rProc);
-			Util::logInfo('Start -> ' . $sFile);
+			Util::logInfo('Start-> ' . $sFile);
 			return true;
 		}
 		else {
-			Util::logInfo('StartError -> ' . $sFile);
+			Util::logInfo('StartError-> ' . $sFile);
 			return false;
 		}
 	}
@@ -107,11 +107,11 @@ abstract class Util_Sys {
 		}
 		if ($rProc = popen($sCmd, $sMode)) {
 			pclose($rProc);
-			Util::logInfo('Start -> ' . $sCmd);
+			Util::logInfo('Start-> ' . $sCmd);
 			return true;
 		}
 		else {
-			Util::logInfo('StartError -> ' . $sCmd);
+			Util::logInfo('StartError-> ' . $sCmd);
 			return false;
 		}
 	}
@@ -131,7 +131,7 @@ abstract class Util_Sys {
 	 * @return int
 	 */
 	public static function getSysProcNumByClass($sClass) {
-		return shell_exec("ps -ef|grep {$sClass}|grep -v grep|wc -l");
+		return shell_exec("ps -ef|grep '{$sClass}'|grep -v grep|wc -l");
 	}
 
 }

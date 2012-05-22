@@ -17,12 +17,13 @@
         -w --listen             需要监控
         --pre-hook={file}       前置钩子
         --post-hook={file}      后置钩子
+        --sync                  异步(未完成)
 
         Commands:
         start                   开启作业
         stop                    结束作业
         restart                 重启作业
-        kill                    根据进程ID结束作业
+        kill                    根据进程ID结束作业(未完成)
     </help>
     <changelog date='2012-04-06'>
         增加Core,Base,Util
@@ -47,6 +48,10 @@
         2.启动命令方法移入Util_Sys中
         3.Listener增加Daemon进程
         4.增加进程监控,相关参数,-w\--listen\--min-daemon-num
-        5.bug Listener父进程怎么退出
+    </changelog>
+    <changelog>
+        1.fix Listener退出bug,fix Listener重启数量bug
+        2.更正shutdown方法pid读取错误的bug
+        3.增加restart方法
     </changelog>
 </root>

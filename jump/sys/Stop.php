@@ -47,7 +47,11 @@ class Stop extends Base {
 	}
 
 	protected function stopProcByIds($aPids, $sPidFile) {
+		$iMyPid = posix_getpid();
 		foreach ($aPids as $iPid) {
+			if ($iMyPid == $iPid) {//if this function is called by a restart command, it will not be killed
+				continue;
+			}
 			if (Util_Sys::stopProcById($iPid)) {
 				$aPids = array_diff($aPids, array($iPid)); //del process id from pid file
 			}

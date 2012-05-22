@@ -47,10 +47,7 @@ class Daemonize {
 				exit;
 			}
 			else {//child
-				register_shutdown_function('Daemonize::shutdown', array(
-					'pid' => posix_getpid(),
-					'pidfile' => $sPidFile
-				));
+				register_shutdown_function('Daemonize::shutdown');
 				chdir('/tmp');
 				umask(022);
 				// detatch from the controlling terminal
@@ -86,9 +83,9 @@ class Daemonize {
 	 * @param array $aPidConf
 	 * @return boolean
 	 */
-	public static function shutdown($aPidConf) {
-		$iPid = $aPidConf['pid'];
-		$sPidFile = $aPidConf['pidfile'];
+	public static function shutdown() {
+		$iPid = posix_getpid();
+		$sPidFile = Util_Sys::getPidFileByClass(Core::getIns()->getJobClass());
 		if (!is_file($sPidFile)) {
 			return false;
 		}

@@ -9,7 +9,9 @@
 class Restart extends Base {
 
 	protected function main() {
-
+		Stop::getIns()->run();
+		Start::getIns()->run();
+		return true;
 	}
 
 }

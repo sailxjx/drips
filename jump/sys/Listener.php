@@ -18,6 +18,7 @@ class Listener extends Base {
 	protected $iCPid;
 
 	const K_PARAMS = 'kp';
+	const K_CONF_CMD = 'kcc';
 	const K_CMD = 'kc';
 	const K_OPTIONS = 'ko';
 	const K_START_TIME = 'kst';
@@ -112,7 +113,7 @@ class Listener extends Base {
 			}
 			$iRNum = intval($iMaxNum - $iNum);
 			$sDNKey = Util_Sys::convParamKeyToArgsKey(Const_Common::P_DAEMON_NUM);
-			$sCmd = preg_replace("/{$sDNKey}\=\d+?/i", $sDNKey . '=' . $iRNum, $aJob[self::K_CMD]);
+			$sCmd = preg_replace("/{$sDNKey}\=\d+?/i", $sDNKey . '=' . $iRNum, $aJob[self::K_CONF_CMD]);
 			$sCmd = APP_PATH . 'launcher.php start ' . $sCmd;
 			Util::logInfo($sCmd, APP_PATH . 'log/listen.log');
 			Util_Sys::runCmd($sCmd);
@@ -122,13 +123,14 @@ class Listener extends Base {
 	protected function readJList() {
 		$aCmds = Util::getConfig('cmd', 'List');
 		$aJClass = array();
-		foreach ($aCmds as $sCmd) {
-			$aArgvs = explode(' ', $sCmd);
+		foreach ($aCmds as $sConfCmd) {
+			$aArgvs = explode(' ', $sConfCmd);
 			list($sClassName, $aParams, $aOptions, $sCmd) = Util_Sys::hashArgv($aArgvs);
 			if (!in_array(Const_Common::OL_LISTEN, $aOptions) && !in_array(Const_Common::OS_LISTEN, $aOptions)) {
 				continue;
 			}
 			$aJClass[$sClassName] = array(
+				self::K_CONF_CMD => $sConfCmd,
 				self::K_CMD => $sCmd,
 				self::K_PARAMS => $aParams,
 				self::K_OPTIONS => $aOptions,
@@ -149,12 +151,35 @@ class Listener extends Base {
 		}
 		elseif ($iPid) {//parent
 			$this->iCPid = $iPid;
+			$this->addPid($iPid);
 			if ($iCPid = pcntl_waitpid($iPid, $iSt)) {//child process exit
+				$this->removePid($iCPid);
 				$this->daemon();
 			}
 		}
 		else {//child
 		}
+		return true;
+	}
+
+	protected function addPid($iPid) {
+		$sPidFile = Util_Sys::getPidFileByClass($this->oCore->getJobClass());
+		$sPids = Util::getFileCon($sPidFile);
+		$aPids = !empty($sPids) ? explode(',', $sPids) : array();
+		$aPids = array_merge($aPids, array($iPid));
+		Util::setFileCon($sPidFile, implode(',', $aPids));
+		return true;
+	}
+
+	protected function removePid($iPid) {
+		$sPidFile = Util_Sys::getPidFileByClass($this->oCore->getJobClass());
+		$sPids = Util::getFileCon($sPidFile);
+		if (empty($sPids)) {
+			return false;
+		}
+		$aPids = explode(',', $sPids);
+		$aPids = array_diff($aPids, array($iPid));
+		Util::setFileCon($sPidFile, implode(',', $aPids));
 		return true;
 	}
 

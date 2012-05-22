@@ -44,16 +44,36 @@ final class Core {
 		return self::$oIns;
 	}
 
+	/**
+	 * get current job class name
+	 * @return string
+	 */
 	public function getJobClass() {
 		return $this->sJobClass;
 	}
 
+	/**
+	 * get current params
+	 * @return array
+	 */
 	public function getParams() {
 		return $this->aParams;
 	}
 
+	/**
+	 * get current options
+	 * @return array
+	 */
 	public function getOptions() {
 		return $this->aOptions;
+	}
+
+	/**
+	 * get current command
+	 * @return string
+	 */
+	public function getCmd() {
+		return $this->sCmd;
 	}
 
 	/**
