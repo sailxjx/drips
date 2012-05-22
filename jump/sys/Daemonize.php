@@ -55,7 +55,7 @@ class Daemonize {
 					Util::logInfo("could not detach from terminal");
 					exit;
 				}
-				self::ctrlSignal();
+//				self::ctrlSignal();
 				break; //break the parent loop
 			}
 		}
@@ -86,6 +86,8 @@ class Daemonize {
 	public static function shutdown() {
 		$iPid = posix_getpid();
 		$sPidFile = Util_Sys::getPidFileByClass(Core::getIns()->getJobClass());
+		Util::logInfo($iPid);
+		Util::logInfo($sPidFile);
 		if (!is_file($sPidFile)) {
 			return false;
 		}

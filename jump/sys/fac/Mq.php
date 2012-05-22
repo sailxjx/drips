@@ -25,11 +25,11 @@ class Fac_Mq {
 
 	/**
 	 * return zmq
-	 * @return Kit_ZMQ
+	 * @return Lib_ZMQ
 	 */
 	public function getZMQ() {
 		if (!isset($this->oZMQ)) {
-			$this->oZMQ = new Kit_ZMQ();
+			$this->oZMQ = new Lib_ZMQ();
 		}
 		return $this->oZMQ;
 	}

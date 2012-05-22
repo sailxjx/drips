@@ -54,5 +54,6 @@
         2.更正shutdown方法pid读取错误的bug
         3.增加restart方法
         4.alpha 0.2
+		5.bug 无signal_handle时register_shutdown_function不生效
     </changelog>
 </root>
