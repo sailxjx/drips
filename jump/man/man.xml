@@ -49,9 +49,10 @@
         3.Listener增加Daemon进程
         4.增加进程监控,相关参数,-w\--listen\--min-daemon-num
     </changelog>
-    <changelog>
+    <changelog date='2012-05-22'>
         1.fix Listener退出bug,fix Listener重启数量bug
         2.更正shutdown方法pid读取错误的bug
         3.增加restart方法
+        4.alpha 0.2
     </changelog>
 </root>

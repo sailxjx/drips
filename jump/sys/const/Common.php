@@ -22,8 +22,8 @@ abstract class Const_Common {
 	const OL_LOG = '--log';
 	const OS_DAEMON = '-d';
 	const OL_DAEMON = '--daemon';
-	const OS_LISTEN = '-w'; //需要监控
-	const OL_LISTEN = '--listen'; //需要监控
+	const OS_LISTEN = '-w';
+	const OL_LISTEN = '--listen';
 	//params
 	const P_DAEMON_NUM = 'daemon_num';
 	const P_LOG_FILE = 'log_file';
