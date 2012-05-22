@@ -24,6 +24,7 @@ class Kit_ZWorker extends Base {
 				->connect($this->sZPushConn);
 		while (1) {
 			$sMsg = $this->oZPullSock->recv();
+			usleep(10);
 			$this->oZPushSock->send(posix_getpid());
 		}
 		return true;

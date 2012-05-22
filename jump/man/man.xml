@@ -54,6 +54,6 @@
         2.更正shutdown方法pid读取错误的bug
         3.增加restart方法
         4.alpha 0.2
-		5.bug 无signal_handle时register_shutdown_function不生效
+		5.ZMQ处理TERM信号时报错(待解决)
     </changelog>
 </root>

@@ -65,7 +65,11 @@ class Daemonize {
 	public static function sigHandler($iSignal) {
 		switch ($iSignal) {
 			case SIGTERM:
-				Util::logInfo('term by system signal!');
+				Util::logInfo("term by system signal![{$iSignal}]");
+				exit;
+				break;
+			case SIGINT:
+				Util::logInfo("term by system signal![{$iSignal}]");
 				exit;
 				break;
 			default:
@@ -76,6 +80,7 @@ class Daemonize {
 	protected static function ctrlSignal() {
 		declare (ticks = 1); //for signal control
 		pcntl_signal(SIGTERM, "Daemonize::sigHandler");
+		pcntl_signal(SIGINT, "Daemonize::sigHandler");
 	}
 
 	/**
@@ -86,8 +91,6 @@ class Daemonize {
 	public static function shutdown() {
 		$iPid = posix_getpid();
 		$sPidFile = Util_Sys::getPidFileByClass(Core::getIns()->getJobClass());
-		Util::logInfo($iPid);
-		Util::logInfo($sPidFile);
 		if (!is_file($sPidFile)) {
 			return false;
 		}
