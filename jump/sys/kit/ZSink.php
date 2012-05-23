@@ -9,13 +9,12 @@
 class Kit_ZSink extends Base {
 
 	protected $oZSock;
-	protected $sZPullConn = 'ipc:///tmp/jump_zsink.ipc';
+	protected $sZPullDsn = 'ipc:///tmp/jump_zsink.ipc';
 
 	protected function main() {
 		$this->oZSock = Fac_Mq::getIns()
-				->getZMQ()
-				->init(ZMQ::SOCKET_PULL)
-				->bind($this->sZPullConn);
+				->getZMQ(ZMQ::SOCKET_PULL)
+				->bind($this->sZPullDsn);
 		$aPidCount = array();
 		for ($i = 0; $i < 100000; $i++) {
 			$sMsg = $this->oZSock->recv();

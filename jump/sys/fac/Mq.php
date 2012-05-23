@@ -21,17 +21,15 @@ class Fac_Mq {
 		return self::$oIns;
 	}
 
-	protected $oZMQ;
-
 	/**
-	 * return zmq
-	 * @return Lib_ZMQ
+	 * get zmq socket
+	 * @param ZType $iZType
+	 * @return \ZMQSocket
 	 */
-	public function getZMQ() {
-		if (!isset($this->oZMQ)) {
-			$this->oZMQ = new Lib_ZMQ();
-		}
-		return $this->oZMQ;
+	public function getZMQ($iZType) {
+		$oZCtxt = new ZMQContext();
+		$oZSock = new ZMQSocket($oZCtxt, $iZType);
+		return $oZSock;
 	}
 
 }

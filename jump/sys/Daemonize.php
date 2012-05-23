@@ -63,13 +63,12 @@ class Daemonize {
 	}
 
 	public static function sigHandler($iSignal) {
+		Util::logInfo("catch system signal![{$iSignal}]");
 		switch ($iSignal) {
 			case SIGTERM:
-				Util::logInfo("term by system signal![{$iSignal}]");
 				exit;
 				break;
 			case SIGINT:
-				Util::logInfo("term by system signal![{$iSignal}]");
 				exit;
 				break;
 			default:
@@ -98,7 +97,7 @@ class Daemonize {
 		$aPids = explode(',', $sPids);
 		$aPids = array_diff($aPids, array($iPid));
 		if (empty($aPids)) {
-			unlink($sPidFile);
+			@unlink($sPidFile);
 		}
 		else {
 			file_put_contents($sPidFile, implode(',', $aPids));

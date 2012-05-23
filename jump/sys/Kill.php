@@ -47,7 +47,7 @@ class Kill extends Base {
 		}
 		if (empty($aOriPids)) {
 			if (file_exists($sPidFile)) {
-				unlink($sPidFile);
+				@unlink($sPidFile);
 			}
 		}
 		else {

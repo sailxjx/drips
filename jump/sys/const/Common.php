@@ -24,11 +24,13 @@ abstract class Const_Common {
 	const OL_DAEMON = '--daemon';
 	const OS_LISTEN = '-w';
 	const OL_LISTEN = '--listen';
+
 	//params
 	const P_DAEMON_NUM = 'daemon_num';
 	const P_LOG_FILE = 'log_file';
 	const P_PRE_HOOK = 'pre_hook';
 	const P_POST_HOOK = 'post_hook';
 	const P_MIN_DAEMON_NUM = 'min_daemon_num';
+	const P_PID = 'pid';
 
 }

@@ -11,19 +11,19 @@
         --log-file={file}       设置日志文件
         --daemon-num={num}      daemon进程数量
         --min-daemon-num={num}  最小daemon进程数量,有监控时低于这个数量将重启,默认为1
-        --proc-id={pid}         进程ID(Kill时需要)
+        --pid={pid}             进程ID(Kill时需要)
         -l --log                显示修订记录
         -v --version            显示版本
         -w --listen             需要监控
         --pre-hook={file}       前置钩子
         --post-hook={file}      后置钩子
-        --sync                  异步(未完成)
+        --sync                  异步(NOTCOMPLETE)
 
         Commands:
         start                   开启作业
         stop                    结束作业
         restart                 重启作业
-        kill                    根据进程ID结束作业(未完成)
+        kill                    根据进程ID结束作业(NOTCOMPLETE)
     </help>
     <changelog date='2012-04-06'>
         增加Core,Base,Util
@@ -54,6 +54,11 @@
         2.更正shutdown方法pid读取错误的bug
         3.增加restart方法
         4.alpha 0.2
-		5.ZMQ处理TERM信号时报错(待解决)
+    </changelog>
+    <changelog date='2012-05-23'>
+        1.去除Daemon中的信号控制
+        2.增加ZReq,发送消息入口
+        3.TODO: ZReq改为Noblock异步调用
+        4.FIXME: Restart对于--daemon-num参数的错误使用
     </changelog>
 </root>

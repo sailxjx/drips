@@ -10,7 +10,7 @@ class Listener extends Base {
 
 	protected $aJobList; //初始数据
 	protected static $sInitFile = 'var/listen.dat'; //初始数据文件
-	protected static $iMaxRetry = 3;
+	protected static $iMaxRetry = 3; //重试次数
 	protected static $iSleep = 5; //睡眠间隔
 	protected static $iDMinDaemon = 1; //默认最小进程数量，低于此进程时会重启
 	protected $iPPid;
@@ -180,7 +180,7 @@ class Listener extends Base {
 		$aPids = explode(',', $sPids);
 		$aPids = array_diff($aPids, array($iPid));
 		if (empty($aPids) && is_file($sPidFile)) {
-			unlink($sPidFile);
+			@unlink($sPidFile);
 			return true;
 		}
 		Util::setFileCon($sPidFile, implode(',', $aPids));

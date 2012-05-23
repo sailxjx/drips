@@ -8,16 +8,21 @@
  */
 class Kit_ZVent extends Base {
 
-	protected $oZSock;
-	protected $sZPushConn = 'ipc:///tmp/jump_zvent.ipc';
+	protected $oZSockPush;
+	protected $oZSockRep;
+	protected $sZPushDsn = 'ipc:///tmp/jump_zvent.ipc';
+	protected $sZRepDsn = 'ipc:///tmp/jump_req.ipc';
 
 	protected function main() {
-		$this->oZSock = Fac_Mq::getIns()
-				->getZMQ()
-				->init(ZMQ::SOCKET_PUSH)
-				->bind($this->sZPushConn);
-		for ($i = 0; $i < 100000; $i++) {
-			$this->oZSock->send($i);
+		$this->oZSockPush = Fac_Mq::getIns()
+				->getZMQ(ZMQ::SOCKET_PUSH)
+				->bind($this->sZPushDsn);
+		$this->oZSockRep = Fac_Mq::getIns()
+				->getZMQ(ZMQ::SOCKET_REP)
+				->bind($this->sZRepDsn);
+		while ($sMsg = $this->oZSockRep->recv()) {
+			$this->oZSockRep->send('recv!');
+			$this->oZSockPush->send($sMsg);
 		}
 		return true;
 	}

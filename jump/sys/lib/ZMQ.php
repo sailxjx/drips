@@ -8,7 +8,6 @@
  */
 class Lib_ZMQ {
 
-	protected static $oIns;
 	protected $oZCon;
 	protected $oZSock;
 

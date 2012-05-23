@@ -60,7 +60,7 @@ class Stop extends Base {
 			}
 		}
 		if (empty($aPids) && is_file($sPidFile)) {
-			unlink($sPidFile);
+			@unlink($sPidFile);
 			return true;
 		}
 		Util::setFileCon($sPidFile, implode(',', $aPids));
