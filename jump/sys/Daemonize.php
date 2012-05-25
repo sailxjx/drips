@@ -9,6 +9,11 @@
 class Daemonize {
 
 	private static $oIns;
+	public static $aNoDaemonCmds = array(
+		Const_Common::C_KILL,
+		Const_Common::C_RESTART,
+		Const_Common::C_STOP
+	);
 
 	/**
 	 * instance of Daemonize
@@ -23,6 +28,9 @@ class Daemonize {
 
 	public function daemon() {
 		$oCore = Core::getIns();
+		if (in_array($oCore->getCmd(), self::$aNoDaemonCmds)) {
+			return false;
+		}
 		$sPidFile = Util_Sys::getPidFileByClass($oCore->getJobClass());
 		if (empty($sPidFile)) {
 			Util::logInfo('could not find pid file!');

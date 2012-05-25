@@ -59,9 +59,9 @@
         1.去除Daemon中的信号控制
         2.增加ZReq,发送消息入口
         3.TODO: ZReq改为Noblock异步调用
-        4.FIXME: Restart对于--daemon-num参数的错误使用
     </changelog>
     <changelog date='2012-05-25'>
         1.增加bash_completion和一个launchershell脚本
+        2.修复Restart对于--daemon-num参数错误使用的bug
     </changelog>
 </root>

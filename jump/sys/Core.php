@@ -77,6 +77,16 @@ final class Core {
 	}
 
 	/**
+	 * 
+	 * @param type $sCmd
+	 * @return type
+	 */
+	public function setCmd($sCmd) {
+		$this->sCmd = $sCmd;
+		return $this->sCmd;
+	}
+
+	/**
 	 * init of JobCore
 	 * @return Core
 	 */

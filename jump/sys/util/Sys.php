@@ -16,7 +16,10 @@ abstract class Util_Sys {
 	}
 
 	public static function stopProcById($iPid) {
-		if (posix_kill($iPid, SIGTERM)) {
+		if (empty($iPid)) {
+			return false;
+		}
+		if (posix_kill(intval($iPid), SIGTERM)) {
 			Util::logInfo('Stop Process Succ:' . $iPid);
 			return true;
 		}
