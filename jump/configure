@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-cat<<EOF
-  --help  show help
-  --verbose
-  --version
-EOF

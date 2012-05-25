@@ -61,4 +61,7 @@
         3.TODO: ZReq改为Noblock异步调用
         4.FIXME: Restart对于--daemon-num参数的错误使用
     </changelog>
+    <changelog date='2012-05-25'>
+        1.增加bash_completion和一个launchershell脚本
+    </changelog>
 </root>
