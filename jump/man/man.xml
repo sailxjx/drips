@@ -11,7 +11,7 @@
         --log-file={file}       设置日志文件
         --daemon-num={num}      daemon进程数量
         --min-daemon-num={num}  最小daemon进程数量,有监控时低于这个数量将重启,默认为1
-        --pid={pid}             进程ID(Kill时需要)
+        --pid={pid}             进程ID,Kill时需要
         -l --log                显示修订记录
         -v --version            显示版本
         -w --listen             需要监控
@@ -24,7 +24,7 @@
         start                   开启作业
         stop                    结束作业
         restart                 重启作业
-        kill                    根据进程ID结束作业(NOTCOMPLETE)
+        kill                    根据进程ID结束作业
     </help>
     <changelog date='2012-04-06'>
         增加Core,Base,Util
