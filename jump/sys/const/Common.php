@@ -24,6 +24,8 @@ abstract class Const_Common {
 	const OL_DAEMON = '--daemon';
 	const OS_LISTEN = '-w';
 	const OL_LISTEN = '--listen';
+	const OS_QUIET = '-q';
+	const OL_QUIET = '--quiet';
 
 	//params
 	const P_DAEMON_NUM = 'daemon_num';

@@ -8,12 +8,12 @@
  */
 class HelloWorld extends Base {
 
-    protected function main() {
-        Util::logInfo('HelloWorld');
-        for ($i = 0; $i < 17; $i++) {
-            Util::logInfo(var_export($this->aParams, true));
-            sleep(3);
-        }
-    }
+	protected function main() {
+		Util::logInfo('HelloWorld');
+		for ($i = 0; $i < 17; $i++) {
+			Util::output($this->aParams);
+			sleep(3);
+		}
+	}
 
 }

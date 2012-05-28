@@ -9,6 +9,7 @@
 abstract class Util {
 
 	protected static $aConfigs = array();
+	protected static $bQuiet;
 
 	/**
 	 * 读取配置文件
@@ -74,15 +75,30 @@ abstract class Util {
 		return file_put_contents($sFile, $sContent, $iOption);
 	}
 
-	public static function output($sContent) {
-		print_r(date('Y-m-d H:i:s') . ':[' . Core::getIns()->getJobClass() . '] ' . $sContent . PHP_EOL);
+	public static function output($mCon) {
+		if (!isset(static::$bQuiet)) {
+			$aOptions = Core::getIns()->getOptions();
+			$aQuiet = array_intersect($aOptions, array(Const_Common::OL_QUIET, Const_Common::OS_QUIET));
+			if (empty($aQuiet)) {
+				static::$bQuiet = false;
+			}
+			else {
+				static::$bQuiet = true;
+			}
+		}
+		if (static::$bQuiet == false) {
+			echo date('Y-m-d H:i:s'), ':[', Core::getIns()->getJobClass(), '] ', var_export($mCon, true), PHP_EOL;
+		}
+		else {
+			self::logInfo($mCon);
+		}
 		return true;
 	}
 
-	public static function logInfo($sContent, $sLogFile = null) {
-		$sContent = date('Y-m-d H:i:s') . ':[' . Core::getIns()->getJobClass() . '] ' . $sContent . PHP_EOL;
+	public static function logInfo($mCon, $sLogFile = null) {
+		$sCon = date('Y-m-d H:i:s') . ':[' . Core::getIns()->getJobClass() . '] ' . var_export($mCon, true) . PHP_EOL;
 		$sLogFile = empty($sLogFile) ? Core::getIns()->getLogFile() : $sLogFile;
-		self::setFileCon($sLogFile, $sContent, FILE_APPEND);
+		self::setFileCon($sLogFile, $sCon, FILE_APPEND);
 		return true;
 	}
 
