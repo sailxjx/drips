@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+baseDir=$(dirname $0)
 showHelp(){
 cat<<EOF
 Usage: launcher.php [Command] [ClassName] [Options] [Arguments]
@@ -25,7 +26,7 @@ EOF
 exit
 }
 runPHP(){
-    ./launcher.php $*
+    $baseDir/launcher.php $*
 }
 
 for p in $*
