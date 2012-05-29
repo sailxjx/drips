@@ -19,6 +19,7 @@
         --post-hook={file}      后置钩子
         --sync                  异步(NOTCOMPLETE)
         -q --quiet              不显示任何输出
+        --other={other}         执行外部PHP文件
 
         Commands:
         start                   开启作业
@@ -64,7 +65,8 @@
         1.增加bash_completion和一个launchershell脚本
         2.修复Restart对于--daemon-num参数错误使用的bug
     </changelog>
-    <todo>ZReq改为Noblock异步调用</todo>
-    <todo>stop,restart,kill改为单进程(免锁)</todo>
+    <todo priority='99'>ZReq改为Noblock异步调用</todo>
+    <todo priority='5'>stop,restart,kill改为单进程(免锁)</todo>
+    <todo priority='1'>执行外部命令</todo>
     <issue></issue>
 </root>

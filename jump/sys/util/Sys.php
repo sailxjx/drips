@@ -87,15 +87,7 @@ abstract class Util_Sys {
 			Util::logInfo('StartError[file is not executable!]-> ' . $sFile);
 			return false;
 		}
-		if ($rProc = popen($sFile, $sMode)) {
-			pclose($rProc);
-			Util::logInfo('Start-> ' . $sFile);
-			return true;
-		}
-		else {
-			Util::logInfo('StartError-> ' . $sFile);
-			return false;
-		}
+		return self::runCmd($sFile, $sMode);
 	}
 
 	/**

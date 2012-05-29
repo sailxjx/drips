@@ -34,5 +34,6 @@ abstract class Const_Common {
 	const P_POST_HOOK = 'post_hook';
 	const P_MIN_DAEMON_NUM = 'min_daemon_num';
 	const P_PID = 'pid';
+	const P_OTHER = 'other';
 
 }
