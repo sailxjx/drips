@@ -15,7 +15,9 @@ final class Core {
 		Const_Common::OS_LOG => 'showChangeLog',
 		Const_Common::OL_LOG => 'showChangeLog',
 		Const_Common::OS_DAEMON => 'daemon',
-		Const_Common::OL_DAEMON => 'daemon'
+		Const_Common::OL_DAEMON => 'daemon',
+		Const_Common::OL_QUIET => 'setQuiet',
+		Const_Common::OS_QUIET => 'setQuiet'
 	);
 	protected $aDCmds = array(
 		Const_Common::C_START,
@@ -31,12 +33,12 @@ final class Core {
 	private static $oIns;
 	protected $sLogFile;
 	protected $iDNum; //Deamon进程个数
+	protected $bQuiet;
 
 	/**
 	 * instance of JobCore
 	 * @return Core
 	 */
-
 	public static function &getIns() {
 		if (!self::$oIns) {
 			self::$oIns = new Core();
@@ -77,7 +79,7 @@ final class Core {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param type $sCmd
 	 * @return type
 	 */
@@ -155,7 +157,20 @@ final class Core {
 			Util::output('Class is not exsit!');
 			$this->showHelp();
 		}
+		$this->setQuiet();
 		Daemonize::getIns()->daemon();
+	}
+
+	public function setQuiet() {
+		if (!isset($this->bQuiet)) {
+			fclose(STDOUT);
+			fclose(STDERR);
+			global $STDOUT, $STDERR;
+			$STDOUT = fopen(Core::getIns()->getLogFile(), 'a');
+			$STDERR = fopen(Core::getIns()->getLogFile(), 'a');
+			$this->bQuiet = true;
+		}
+		return $this->bQuiet;
 	}
 
 	public function showHelp() {
