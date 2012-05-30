@@ -5,19 +5,19 @@ cat<<EOF
 Usage: launcher.php [Command] [ClassName] [Options] [Arguments]
   --help                  显示帮助信息
   -d --daemon             以守护进程方式启动
-  --log-file={file}       设置日志文件
-  --daemon-num={num}      daemon进程数量
-  --min-daemon-num={num}  最小daemon进程数量,有监控时低于这个数量将重启,默认为1
-  --pid={pid}             进程ID,Kill时需要
+  --log-file              设置日志文件
+  --daemon-num            daemon进程数量
+  --min-daemon-num        最小daemon进程数量,有监控时低于这个数量将重启,默认为1
+  --pid                   进程ID,Kill时需要
   -l --log                显示修订记录
   -v --version            显示版本
   -w --listen             需要监控
-  --pre-hook={file}       前置钩子
-  --post-hook={file}      后置钩子
+  --pre-hook              前置钩子
+  --post-hook             后置钩子
   --sync                  异步(NOTCOMPLETE)
   -q --quiet              不显示任何输出
-  --other={other}         执行外部PHP文件
-  
+  --other                 执行外部PHP文件
+
   Commands:
   start                   开启作业
   stop                    结束作业
