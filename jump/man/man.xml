@@ -28,13 +28,13 @@
         kill                    根据进程ID结束作业
     </help>
     <changelog date='2012-04-06'>
-        增加Core,Base,Util
+        1.增加Core,Base,Util
     </changelog>
     <changelog date='2012-04-08'>
-        增加Daemon,选择日志文件开关,fork数量开关
+        1.增加Daemon,选择日志文件开关,fork数量开关
     </changelog>
     <changelog date='2012-04-16'>
-        增加shutdown方法,增加Start类,增加批量启动,修改启动方式
+        1.增加shutdown方法,增加Start类,增加批量启动,修改启动方式
     </changelog>
     <changelog date='2012-04-17'>
         1.增加Stop类,批量停止。
