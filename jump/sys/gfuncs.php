@@ -3,9 +3,6 @@
 spl_autoload_register('jumpAutoLoad');
 
 function jumpAutoLoad($sName) {
-	if (class_exists($sName)) {
-		return true;
-	}
 	return reqClass($sName);
 }
 

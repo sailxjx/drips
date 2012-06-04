@@ -4,7 +4,7 @@ define('APP_PATH', realpath(dirname(__FILE__)) . '/'); //工作目录
 define('ENV', 'dev'); //设置工作环境:dev/ga
 
 $G_LOAD_PATH = array(
-	APP_PATH . 'classes/',
+	APP_PATH . 'app/',
 	APP_PATH . 'sys/'
 );
 
