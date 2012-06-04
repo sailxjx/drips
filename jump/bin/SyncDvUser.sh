@@ -1,5 +1,5 @@
 #!/bin/bash
-baseDir="/home/tristan/coding/exp/jump/"
+baseDir="$(dirname $0)/../"
 idFile="${baseDir}var/lastuser.id"
 launcherCmd="${baseDir}launcher.php start SyncDvUser"
 [[ ! -f $idFile ]] && echo 0 > $idFile
