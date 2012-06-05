@@ -17,7 +17,7 @@
         -w --listen             需要监控
         --pre-hook={file}       前置钩子
         --post-hook={file}      后置钩子
-        --sync                  异步(NOTCOMPLETE)
+        --async                 异步(NOTCOMPLETE)
         -q --quiet              不显示任何输出
         --other={other}         执行外部PHP文件
 

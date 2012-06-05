@@ -14,7 +14,7 @@ Usage: launcher.php [Command] [ClassName] [Options] [Arguments]
   -w --listen             需要监控
   --pre-hook              前置钩子
   --post-hook             后置钩子
-  --sync                  异步(NOTCOMPLETE)
+  --async                 异步(NOTCOMPLETE)
   -q --quiet              不显示任何输出
   --other                 执行外部PHP文件
 
