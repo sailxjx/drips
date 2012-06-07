@@ -31,7 +31,7 @@ class Daemonize {
 		if (in_array($oCore->getCmd(), self::$aNoDaemonCmds)) {
 			return false;
 		}
-		$sPidFile = Util_Sys::getPidFileByClass($oCore->getJobClass());
+		$sPidFile = Util_SysUtil::getPidFileByClass($oCore->getJobClass());
 		if (empty($sPidFile)) {
 			Util::logInfo('could not find pid file!');
 			exit;
@@ -97,7 +97,7 @@ class Daemonize {
 	 */
 	public static function shutdown() {
 		$iPid = posix_getpid();
-		$sPidFile = Util_Sys::getPidFileByClass(Core::getIns()->getJobClass());
+		$sPidFile = Util_SysUtil::getPidFileByClass(Core::getIns()->getJobClass());
 		if (!is_file($sPidFile)) {
 			return false;
 		}

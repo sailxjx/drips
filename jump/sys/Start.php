@@ -33,7 +33,7 @@ class Start extends Base {
 		$sCmd = '';
 		foreach ($aJList as $sOriCmd) {
 			$sCmd = APP_PATH . 'launcher.php start ' . $sOriCmd;
-			Util_Sys::runCmd($sCmd);
+			Util_SysUtil::runCmd($sCmd);
 		}
 		return true;
 	}

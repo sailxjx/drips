@@ -40,8 +40,8 @@ class Stop extends Base {
 			$this->oCore->showHelp();
 			return false;
 		}
-		$aPids = Util_Sys::getProcIdsByClass($sJClass);
-		$sPidFile = Util_Sys::getPidFileByClass($sJClass);
+		$aPids = Util_SysUtil::getProcIdsByClass($sJClass);
+		$sPidFile = Util_SysUtil::getPidFileByClass($sJClass);
 		$this->stopProcByIds($aPids, $sPidFile);
 		return true;
 	}
@@ -52,7 +52,7 @@ class Stop extends Base {
 			if ($iMyPid == $iPid) {//if this function is called by a restart command, it will not be killed
 				continue;
 			}
-			if (Util_Sys::stopProcById($iPid)) {
+			if (Util_SysUtil::stopProcById($iPid)) {
 				$aPids = array_diff($aPids, array($iPid)); //del process id from pid file
 			}
 			else {

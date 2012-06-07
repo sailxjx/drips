@@ -51,7 +51,7 @@ class Hook {
 		}
 		foreach ((array) $aPostHooks as $sShell) {
 			$sFile = APP_PATH . 'hooks/' . $sShell;
-			Util_Sys::runFile($sFile);
+			Util_SysUtil::runFile($sFile);
 		}
 		return true;
 	}

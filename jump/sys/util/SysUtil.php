@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Document: Sys
+ * Document: SysUtil
  * Created on: 2012-5-17, 17:12:10
  * @author: jxxu
  * GTalk: sailxjx@gmail.com
  */
-abstract class Util_Sys {
+abstract class Util_SysUtil {
 
 	public static function getPidFileByClass($sCName) {
 		if (empty($sCName)) {

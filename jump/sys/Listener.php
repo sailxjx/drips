@@ -101,7 +101,7 @@ class Listener extends Base {
 			if (empty($sClass)) {
 				continue;
 			}
-			$iNum = Util_Sys::getSysProcNumByClass($sClass);
+			$iNum = Util_SysUtil::getSysProcNumByClass($sClass);
 			$iMaxNum = !isset($aJob[self::K_PARAMS][Const_Common::P_DAEMON_NUM]) ? 1 :
 					($aJob[self::K_PARAMS][Const_Common::P_DAEMON_NUM] > $iCMaxDNum ? $iCMaxDNum :
 							$aJob[self::K_PARAMS][Const_Common::P_DAEMON_NUM]);
@@ -112,11 +112,11 @@ class Listener extends Base {
 				continue;
 			}
 			$iRNum = intval($iMaxNum - $iNum);
-			$sDNKey = Util_Sys::convParamKeyToArgsKey(Const_Common::P_DAEMON_NUM);
+			$sDNKey = Util_SysUtil::convParamKeyToArgsKey(Const_Common::P_DAEMON_NUM);
 			$sCmd = preg_replace("/{$sDNKey}\=\d+?/i", $sDNKey . '=' . $iRNum, $aJob[self::K_CONF_CMD]);
 			$sCmd = APP_PATH . 'launcher.php start ' . $sCmd;
 			Util::logInfo($sCmd, APP_PATH . 'log/listen.log');
-			Util_Sys::runCmd($sCmd);
+			Util_SysUtil::runCmd($sCmd);
 		}
 	}
 
@@ -125,7 +125,7 @@ class Listener extends Base {
 		$aJClass = array();
 		foreach ($aCmds as $sConfCmd) {
 			$aArgvs = explode(' ', $sConfCmd);
-			list($sClassName, $aParams, $aOptions, $sCmd) = Util_Sys::hashArgv($aArgvs);
+			list($sClassName, $aParams, $aOptions, $sCmd) = Util_SysUtil::hashArgv($aArgvs);
 			if (!in_array(Const_Common::OL_LISTEN, $aOptions) && !in_array(Const_Common::OS_LISTEN, $aOptions)) {
 				continue;
 			}
@@ -163,7 +163,7 @@ class Listener extends Base {
 	}
 
 	protected function addPid($iPid) {
-		$sPidFile = Util_Sys::getPidFileByClass($this->oCore->getJobClass());
+		$sPidFile = Util_SysUtil::getPidFileByClass($this->oCore->getJobClass());
 		$sPids = Util::getFileCon($sPidFile);
 		$aPids = !empty($sPids) ? explode(',', $sPids) : array();
 		$aPids = array_merge($aPids, array($iPid));
@@ -172,7 +172,7 @@ class Listener extends Base {
 	}
 
 	protected function removePid($iPid) {
-		$sPidFile = Util_Sys::getPidFileByClass($this->oCore->getJobClass());
+		$sPidFile = Util_SysUtil::getPidFileByClass($this->oCore->getJobClass());
 		$sPids = Util::getFileCon($sPidFile);
 		if (empty($sPids)) {
 			return false;

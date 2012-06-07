@@ -30,15 +30,15 @@ class Kill extends Base {
 			$this->oCore->showHelp();
 			return false;
 		}
-		$aOriPids = Util_Sys::getProcIdsByClass($sJClass);
-		$sPidFile = Util_Sys::getPidFileByClass($sJClass);
+		$aOriPids = Util_SysUtil::getProcIdsByClass($sJClass);
+		$sPidFile = Util_SysUtil::getPidFileByClass($sJClass);
 		$aPids = array_intersect($aOriPids, $aPids);
 		if (empty($aPids)) {
 			Util::output('Process id error');
 			return false;
 		}
 		foreach ($aPids as $iPid) {
-			if (Util_Sys::stopProcById($iPid)) {
+			if (Util_SysUtil::stopProcById($iPid)) {
 				$aOriPids = array_diff($aOriPids, array($iPid));
 			}
 			else {

@@ -94,7 +94,7 @@ final class Core {
 	 */
 	public function init($argv) {
 		unset($argv[0]);
-		list($this->sJobClass, $this->aParams, $this->aOptions, $this->sCmd) = Util_Sys::hashArgv($argv, $this->aDCmds);
+		list($this->sJobClass, $this->aParams, $this->aOptions, $this->sCmd) = Util_SysUtil::hashArgv($argv, $this->aDCmds);
 		return self::$oIns;
 	}
 
