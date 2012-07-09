@@ -12,8 +12,8 @@ final class Core {
 		Const_Common::OL_HELP => 'showHelp',
 		Const_Common::OS_VERSION => 'showVersion',
 		Const_Common::OL_VERSION => 'showVersion',
-		Const_Common::OS_LOG => 'showChangeLog',
-		Const_Common::OL_LOG => 'showChangeLog',
+		Const_Common::OS_LOG => 'showLog',
+		Const_Common::OL_LOG => 'showLog',
 		Const_Common::OS_DAEMON => 'daemon',
 		Const_Common::OL_DAEMON => 'daemon',
 		Const_Common::OL_QUIET => 'setQuiet',
@@ -141,7 +141,7 @@ final class Core {
 		exit;
 	}
 
-	public function showChangeLog() {
+	public function showLog() {
 		$oXml = simplexml_load_file(Util::getConfig('ManPage'));
 		foreach ($oXml->changelog as $oChangeLog) {
 			$aAttrs = json_decode(json_encode($oChangeLog), true);
