@@ -701,16 +701,3 @@ a:focus {
     Thanks for reading. I hope you enjoyed it at least as much as I enjoyed writing it
     for you.
 */
-
-.slide .right{
-    float: right;
-}
-.slide .bottom{
-    margin-bottom: 10px;
-}
-
-
-/* own stylesheet */
-.slide .g_intro{
-    margin: 300px 100px;
-}
