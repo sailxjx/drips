@@ -1,8 +1,8 @@
 baseDir = File.dirname(File.expand_path(__FILE__))
 
-require "#{baseDir}/../src/dysort"
+require "#{baseDir}/../src/trsort"
 
-include Dysort
+include Trsort
 
 dataInput = [3,10,11,9,1,2,-1,12,7]
 dataResule = [-1, 12]
