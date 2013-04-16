@@ -47,7 +47,7 @@ class Acv
     return primeStepNumList
   end
 
-  # protected
+  protected
   def get_divisor(n)
     (2..Math.sqrt(n).to_i).select {|x| n % x == 0}
   end
@@ -55,10 +55,10 @@ class Acv
   # f(n) = min(f(n-1) + 1, f(n/k) + k + 2)
   def get_steps(n, num = 0, list = [])
     if n == 1  # f(1) = 1
-      return 1 + num, list.concat([:a])
+      return 1 + num, [:a].concat(list)
     end
     if @primes[n]
-      return @primes[n]['num'] + num, list.concat(@primes[n]['list'])
+      return @primes[n]['num'] + num, @primes[n]['list'].clone.concat(list)
     end
     allRoutes = [get_steps(n - 1, num + 1, [:a].concat(list))]
     get_divisor(n).each do |k|
@@ -72,6 +72,7 @@ end
 ## pre caculate the route of all prime numbers
 # print Acv.new(10).calculate_primes(0..100)
 # n = 300
-# acvRun = Acv.new(n).run
-# puts "steps: #{acvRun.get_step_num}"
-# puts "route: #{acvRun.get_step_list}"
+n = 9
+acvRun = Acv.new(n).run
+puts "steps: #{acvRun.get_step_num}"
+puts "route: #{acvRun.get_step_list}"
