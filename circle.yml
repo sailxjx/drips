@@ -1,3 +1,6 @@
+test:
+  override:
+    - make test
 notify:
   webhooks:
     - url: https://talk.ai/webhook-receiver/circle
