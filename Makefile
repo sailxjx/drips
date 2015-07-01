@@ -1,2 +1,2 @@
 test:
-	echo bye
+	exit 1
