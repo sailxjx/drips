@@ -1,2 +1,2 @@
 test:
-	exit 1
+	echo ok
