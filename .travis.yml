@@ -1,6 +1,9 @@
-language: ruby 
+language: ruby
 branches:
   only:
     - 'master'
 script:
-  - cd acv && make test
+  - make test
+notifications:
+  webhooks:
+    - https://talk.ai/webhook-receiver/travis
