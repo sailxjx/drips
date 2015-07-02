@@ -6,4 +6,4 @@ script:
   - make test
 notifications:
   webhooks:
-    - https://talk.ai/webhook-receiver/travis
+    - https://jianliao.com/v1/services/webhook/9ce14d29d6fd3710007c7115c48b6a1da391b124

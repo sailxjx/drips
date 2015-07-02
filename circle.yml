@@ -3,5 +3,4 @@ test:
     - make test
 notify:
   webhooks:
-    - url: https://talk.ai/webhook-receiver/circle
-    - url: https://hook.lesschat.com/circleci/b48ad666ba814a828823b600f65b4ae3
+    - url: https://jianliao.com/v1/services/webhook/140a4b6f64a4334c8fc0600be48aae6b2a0f93fd
